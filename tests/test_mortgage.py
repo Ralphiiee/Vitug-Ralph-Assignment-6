@@ -15,7 +15,7 @@ class MortgageTests(TestCase):
     #unit test that will raise value error if amount is invalid
     def test_invalid_amount(self):
         with self.assertRaises(ValueError):
-            Mortgage(-10000, 0.0519, "montly", 25)
+            Mortgage(-10000, 0.0519, "monthly", 25)
 
     #unit test that will raise value error if interest is invalid
     def test_invalid_interest_rate(self):
@@ -36,17 +36,34 @@ class MortgageTests(TestCase):
     def test_valid_input(self):
         #Arrange
         amount = 500000
-        rate = 0.0599
+        rate = "FIXED_5"
         frequency = "monthly"
         amortization = 25
         expected = Mortgage(amount, rate, frequency, amortization)
 
         #Act and Assert
         self.assertEqual(expected.amount, 50000)
-        self.assertEqual(expected.__rate, )
+        self.assertEqual(expected.__rate, "FIXED_5")
         self.assertEqual(expected.__frequency, "monthly")
         self.assertEqual(expected.__amortization, 25)
 
+    #unit test that checks negative amount then will raise value error if amount is negative
+    def test_set_negative_amount(self):
+        mortgage = Mortgage(500000, "FIXED_5", "monthly", 25)
+        with self.assertRaises(ValueError):
+            mortgage.loan_amount = -5000
+
+    #unit test that check if amount is > zero, if not, it will raise a value error
+    def test_set_zero_amount(self):
+        mortgage = Mortgage(500000, "FIXED_5", "monthly", 25)
+        with self.assertRaises(ValueError):
+            mortgage.loan_amount = 0
+
+    #unit test that returns a positive value
+    def test_valid_amount(self):
+        mortgage = Mortgage(500000, "FIXED_5", "monthly", 25)
+        mortgage.loan_amount = 450000
+        self.assertEqual(mortgage.loan_amount, 450000)
 
 
 if __name__ == "__main__":
