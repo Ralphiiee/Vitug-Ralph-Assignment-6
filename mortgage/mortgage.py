@@ -51,5 +51,34 @@ class Mortgage:
                 raise ValueError("Loan amount must be positive ")
             self.__loan_amount = value
 
+        #Defining an accessor that will return rate
+        @property
+        def rate(self):
+            
+            return self.__rate
+        
+        #Defining mutator that contains try and except block. it will catch value error and return a string value
+        @rate.setter
+        def rate(self, rate_value):
+            try:
+                self.__rate = MortgageRate[rate_value]
+            except Exception:
+                raise ValueError("Rate provided is invalid")
+            
+        #defining an accessor that will return frequency
+        @property
+        def frequency(self):
+
+            return self.__frequency
+        
+        #Defining mutator that contains try and except block, it will catch a value error and return a string value
+        @frequency.setter
+        def frequency(self, frequency_value):
+            try:
+                self.__frequency = Mortgage[frequency_value]
+            except Exception:
+                raise ValueError("Frequency provided is invalid")
+            
+            
 
         pass

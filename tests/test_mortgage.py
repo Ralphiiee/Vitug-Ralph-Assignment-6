@@ -65,6 +65,28 @@ class MortgageTests(TestCase):
         mortgage.loan_amount = 450000
         self.assertEqual(mortgage.loan_amount, 450000)
 
+    #unit test for mutator that will raise value error
+    def test_invalid_rate(self):
+        mortgage = Mortgage(250000, "FIXED_5", "monthly", 5)
+        with self.assertRaises(ValueError):
+            mortgage.__rate = "Conservative"
+
+    #unit test for accessor that will return a positive value
+    def test_valid_rate(self):
+        mortgage = Mortgage(250000, "FIXED_5", "monthly", 25)
+        mortgage.rate = "FIXED_5"
+
+    #unit test for mutator that will raise value error
+    def test_invalid_frequency(self):
+        mortgage = Mortgage(210000, "FIXED_5", "monthly", 5)
+        with self.assertRaises(ValueError):
+            mortgage.__frequency = "hourly"
+
+    #unit test for accessor that will return a valid test
+    def test_valid_return_frequency(self):
+        mortgage = Mortgage(210000, "FIXED_5", "monthly", 5)
+        mortgage.__frequency = "monthly"
+
 
 if __name__ == "__main__":
     unittest.main()
