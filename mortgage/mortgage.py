@@ -35,7 +35,7 @@ class Mortgage:
         
         #try and except block is initiated to catch an exception that will raise a value error that will return a string message
         try:
-            self.__amortization = VALID_AMORTIZATION[str_amortization_value]
+            self.__amortization = [VALID_AMORTIZATION][str_amortization_value]
         except Exception as e:
             raise ValueError("Amortization provided is invalid.")
         
@@ -63,7 +63,7 @@ class Mortgage:
             try:
                 self.__rate = MortgageRate[rate_value]
             except Exception:
-                raise ValueError("Rate provided is invalid")
+                raise ValueError("Rate provided is invalid.")
             
         #defining an accessor that will return frequency
         @property
@@ -75,10 +75,23 @@ class Mortgage:
         @frequency.setter
         def frequency(self, frequency_value):
             try:
-                self.__frequency = Mortgage[frequency_value]
+                self.__frequency = PaymentFrequency[frequency_value]
             except Exception:
-                raise ValueError("Frequency provided is invalid")
+                raise ValueError("Frequency provided is invalid.")
             
-            
+        #Defining an accessor that will return valid amortization
+        @property
+        def amortization(self):
+
+            return self.__amortization
+        
+        #defining mutator that contains try and except block, it will catch a value error and return a string value
+        @amortization.setter
+        def amortization(self, amortization_value):
+            try:
+                self.__amortization = [VALID_AMORTIZATION][amortization_value]
+            except Exception:
+                raise ValueError("amortization provided is invalid.")
+
 
         pass

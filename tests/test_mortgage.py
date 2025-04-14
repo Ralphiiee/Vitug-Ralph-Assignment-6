@@ -49,44 +49,72 @@ class MortgageTests(TestCase):
 
     #unit test that checks negative amount then will raise value error if amount is negative
     def test_set_negative_amount(self):
+        #Arrange
         mortgage = Mortgage(500000, "FIXED_5", "monthly", 25)
+        #Act and Assert
         with self.assertRaises(ValueError):
             mortgage.loan_amount = -5000
 
     #unit test that check if amount is > zero, if not, it will raise a value error
     def test_set_zero_amount(self):
+        #Arrange
         mortgage = Mortgage(500000, "FIXED_5", "monthly", 25)
+        #Act and Assert
         with self.assertRaises(ValueError):
             mortgage.loan_amount = 0
 
     #unit test that returns a positive value
     def test_valid_amount(self):
+        #Arrange
         mortgage = Mortgage(500000, "FIXED_5", "monthly", 25)
         mortgage.loan_amount = 450000
+        #Act and Assert
         self.assertEqual(mortgage.loan_amount, 450000)
 
     #unit test for mutator that will raise value error
     def test_invalid_rate(self):
+        #Arrange
         mortgage = Mortgage(250000, "FIXED_5", "monthly", 5)
+        #Act and Assert
         with self.assertRaises(ValueError):
             mortgage.__rate = "Conservative"
 
     #unit test for accessor that will return a positive value
     def test_valid_rate(self):
+        #Arrange
         mortgage = Mortgage(250000, "FIXED_5", "monthly", 25)
+        #Act and Assert
         mortgage.rate = "FIXED_5"
 
     #unit test for mutator that will raise value error
     def test_invalid_frequency(self):
+        #Arrange
         mortgage = Mortgage(210000, "FIXED_5", "monthly", 5)
+        #Act and Assert
         with self.assertRaises(ValueError):
             mortgage.__frequency = "hourly"
 
     #unit test for accessor that will return a valid test
     def test_valid_return_frequency(self):
+        #Arrange
         mortgage = Mortgage(210000, "FIXED_5", "monthly", 5)
+        #Act and Assert
         mortgage.__frequency = "monthly"
 
+    #unit test for mutator that will raise value error
+    def test_invalid_amortization_value(self):
+        #Arrange
+        mortgage = Mortgage(210000, "FIXED_5", "monthly", 5)
+        #Act and Assert
+        with self.assertRaises(ValueError):
+            mortgage.__amortization = 1
+
+    #unit test for accessor that will return a valid value
+    def test_valid_amortization_value(self):
+        #Arrange
+        mortgage = Mortgage(210000, "FIXED_5", "monthly", 5)
+        #Act and Assert
+        mortgage.__amortization = 25
 
 if __name__ == "__main__":
     unittest.main()
