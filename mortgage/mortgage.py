@@ -94,4 +94,38 @@ class Mortgage:
                 raise ValueError("amortization provided is invalid.")
 
 
+    #Defining a method that will calculate the payment for mortgage. formula is as per instructions
+        def calculate_payment(self) -> float:
+
+            """
+            Args: calculate payment using given formula
+            calculate_payment: returns a float value
+            """
+
+            pay_frequency = {
+                "WEEKLY" : 52,
+                "BI-WEEKLY" : 26,
+                "MONTHLY" : 12
+            }
+            
+            payment_per_year = pay_frequency.get(self.__frequency.lower())
+            if not payment_per_year:
+                raise ValueError ("Invalid payment frequency")
+            
+            principal = self.loan_amount
+            annual_rate = self.rate.value
+            periods = self.__amortization * payment_per_year
+            periodic_rate = annual_rate / payment_per_year
+
+            #Mortgage formula as provided
+            numerator = periodic_rate * (1 +periodic_rate) ** periods
+            denominator = (1 + periodic_rate) ** periods - 1
+            payment = principal * (numerator / denominator)
+
+            return round(payment, 2)
+        
+
         pass
+
+mortgage = Mortgage(123456.12, "FIXED_5", "MONTHLY", 10)
+print(mortgage.calculate_payment())

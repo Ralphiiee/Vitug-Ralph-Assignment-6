@@ -9,6 +9,7 @@ from unittest import TestCase
 from mortgage.mortgage import Mortgage
 from mortgage.pixell_lookup import MortgageRate, PaymentFrequency
 from unittest.mock import patch
+from mortgage.mortgage import Mortgage
 
 class MortgageTests(TestCase):
 
@@ -115,6 +116,12 @@ class MortgageTests(TestCase):
         mortgage = Mortgage(210000, "FIXED_5", "monthly", 5)
         #Act and Assert
         mortgage.__amortization = 25
+
+    #unit test for weekly payment formula
+    def test_calculate_payment_weekly(self):
+        mortgage = Mortgage(210000, "FIXED_5", "WEEKLY", 25)
+        self.assertAlmostEqual(mortgage.calculate_payment(), 221.21, places=2)
+
 
 if __name__ == "__main__":
     unittest.main()
