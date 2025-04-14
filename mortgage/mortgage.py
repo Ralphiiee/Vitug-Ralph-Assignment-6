@@ -23,19 +23,19 @@ class Mortgage:
 
         #try and except block is initiated to catch an exception in which will raise a value error that returns a string value
         try:
-            self.__rate = MortgageRate[string_rate_value]
+            self.__rate = MortgageRate[rate.str]
         except Exception as e:
             raise ValueError("Rate provided is invalid.")
         
         #try and except block is initiated to catch an exception that will raise a value error that returns a string message
         try:
-            self.__frequency = PaymentFrequency[string_frequency_value]
+            self.__frequency = PaymentFrequency[frequency.str]
         except Exception as e:
             raise ValueError("Frequency provided is invalid.")
         
         #try and except block is initiated to catch an exception that will raise a value error that will return a string message
         try:
-            self.__amortization = VALID_AMORTIZATION[string_amortization_value]
+            self.__amortization = VALID_AMORTIZATION[amortization.int]
         except Exception as e:
             raise ValueError("Amortization provided is invalid.")
         
